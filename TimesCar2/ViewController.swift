@@ -117,13 +117,31 @@ class ViewController: UIViewController {
         
         // 檢查車子是否到達終點
         if carImageViews[questionViewTag].frame.maxX >= finalLineImageView.frame.minX {
+            var msg = ""
             if questionViewTag == 0 {
-                winButton.setTitle("維尼獲勝！", for: .normal)
+//                winButton.setTitle("維尼獲勝！", for: .normal)
+                msg = "維尼獲勝！"
             } else {
-                winButton.setTitle("唐老鴨獲勝！", for: .normal)
+//                winButton.setTitle("唐老鴨獲勝！", for: .normal)
+                msg = "唐老鴨獲勝！"
             }
             // 顯示哪位玩家獲勝
-            winButton.isHidden = false
+//            winButton.isHidden = false
+            let alertController = UIAlertController(title: msg, message: "", preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "再玩一次",
+                style: .default,
+                handler: {
+                    (action: UIAlertAction!) -> Void in
+                    self.initGame()
+            })
+            alertController.addAction(okAction)
+
+            // 顯示提示框
+            self.present(
+                alertController,
+                animated: true,
+                completion: nil)
         }
         
         questionIndex += 1 //進入下一題
